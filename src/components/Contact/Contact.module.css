@@ -1,0 +1,11 @@
+.profile > .user:first-child {
+  margin-bottom: 8px;
+}
+
+.user,
+.phone {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+}
