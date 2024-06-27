@@ -1,9 +1,11 @@
 import { useId } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import { addContact } from '../../redux/contactsOps';
+import { selectLoading } from '../../redux/contactsSlice';
+
 import styles from './ContactForm.module.css';
-import { useDispatch } from 'react-redux';
-import { addContact } from '../../redux/contactsSlice';
 
 const addContactSchema = Yup.object().shape({
   name: Yup.string()
@@ -17,10 +19,11 @@ const addContactSchema = Yup.object().shape({
 });
 
 function ContactForm() {
+  const dispatch = useDispatch();
+  const isLoading = useSelector(selectLoading);
+
   const nameFieldId = useId();
   const numberFieldId = useId();
-
-  const dispatch = useDispatch();
 
   const initValues = { name: '', number: '' };
 
@@ -52,7 +55,9 @@ function ContactForm() {
           />
         </div>
 
-        <button type="submit">Add contact</button>
+        <button type="submit" disabled={isLoading}>
+          Add contact
+        </button>
       </Form>
     </Formik>
   );
