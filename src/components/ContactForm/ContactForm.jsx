@@ -12,7 +12,7 @@ const addContactSchema = Yup.object().shape({
     .min(3, 'Too short')
     .max(50, 'Too long')
     .required('Name required to fill out'),
-  number: Yup.string()
+  phone: Yup.string()
     .min(7, 'Too short')
     .max(9, 'Too long')
     .required('Phone number required to fill out'),
@@ -23,9 +23,9 @@ function ContactForm() {
   const isLoading = useSelector(selectLoading);
 
   const nameFieldId = useId();
-  const numberFieldId = useId();
+  const phoneFieldId = useId();
 
-  const initValues = { name: '', number: '' };
+  const initValues = { name: '', phone: '' };
 
   function handleSubmit(contact, actions) {
     dispatch(addContact(contact));
@@ -46,10 +46,10 @@ function ContactForm() {
         </div>
 
         <div className={styles.fieldset}>
-          <label htmlFor={numberFieldId}>Number</label>
-          <Field id={numberFieldId} name="number" type="text" />
+          <label htmlFor={phoneFieldId}>Phone</label>
+          <Field id={phoneFieldId} name="phone" type="text" />
           <ErrorMessage
-            name="number"
+            name="phone"
             component="span"
             className={styles.error}
           />
